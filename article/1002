@@ -1,0 +1,90 @@
+HDU-1754 I hate it (裸线段树)
+##代码：
+#include <stdio.h>  
+#include <string.h>  
+  
+#include <iostream>  
+#include <algorithm>  
+  
+using namespace std;  
+  
+struct node  
+{  
+    int maxn;  
+    int begin;  
+    int end;  
+} tree[880000];  
+  
+int n, m;  
+int pa[220000];  
+  
+int build(int root, int begin, int end)  
+{  
+    tree[root].begin = begin;  
+    tree[root].end = end;  
+    if (begin == end) {  
+        scanf("%d", &tree[root].maxn);  
+        pa[begin] = root;  
+        return tree[root].maxn;  
+    } else {  
+        int left = build(root << 1, begin, begin+(end-begin)/2);  
+        int right = build(root << 1 | 1, begin+(end-begin)/2+1, end);  
+        tree[root].maxn = max(left, right);  
+        return tree[root].maxn;  
+    }  
+}  
+  
+void update(int root)  
+{  
+    int left = tree[root<<1].maxn;  
+    int right = tree[root<<1|1].maxn;  
+    tree[root].maxn = max(left, right);  
+    if (root != 1) {  
+        update(root >> 1);  
+    }  
+}  
+  
+int query(int root, int front, int rear)  
+{  
+    if (front == tree[root].begin && rear == tree[root].end) {  
+        return tree[root].maxn;  
+    } else if (front > rear) {  
+        return 0;  
+    }  
+  
+    int middle = tree[root].begin + (tree[root].end - tree[root].begin) / 2;  
+  
+    if (rear < middle + 1) {  
+        return query(root << 1, front, rear);  
+    } else if (front > middle) {  
+        return query(root << 1 | 1, front, rear);  
+    } else {  
+        int left = query(root << 1, front, middle);  
+        int right = query(root << 1 | 1, middle+1, rear);  
+        return max(left, right);  
+    }  
+}  
+  
+int main()  
+{  
+    int x, y;  
+    char command[110];  
+  
+    while (scanf("%d%d", &n, &m) != EOF) {  
+        build(1, 1, n);  
+        for (int i = 1; i <= m; i++) {  
+            scanf("%s%d%d", command, &x, &y);  
+            if (command[0] == 'Q') {  
+                int maxn = query(1, x, y);  
+                printf("%d\n", maxn);  
+            } else if (command[0] == 'U') {  
+                tree[pa[x]].maxn = y;  
+                update(pa[x]>>1);  
+            }  
+        }  
+    }  
+  
+    return 0;  
+}  
+
+

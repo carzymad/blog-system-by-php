@@ -1,0 +1,96 @@
+HDU-1698 Just a Hook(线段树)
+##题目大意：
+dota2里面有个英雄叫屠夫，屠夫有一个钩子武器，武器上面有n个勾钉，一开始这些勾钉全部是用铜做的。后来规定屠夫可以对钩子做m次修改，使得钩子上一部分连续的勾钉改为用银子做的，或者是金子做的。
+一个铜钉的价值是1
+一个银钉的价值是2
+一个金钉的价值是3
+请问在做m次变换后钩子的总价值是多少。
+
+##算法分析：
+这道题无疑使用线段树做，我之前做了几道线段树的题，对线段树已经有了一定的了解，可以在很快的时间里面将线段树模板敲出来。但是遇到这道题就抓瞎了。这道题相当灵活，不是简单的敲个模板就能过去的，我一开始没想清楚就开始做，结果就超时了，
+后来还是稍微看了一下别人的代码（虽然没看懂，但是给了我很大的启发），才将这道题做出来的。
+这道题的关键在于，每次改变都是改变的一块连续的区域，如果对该块区域没个点进行更新操作的话，绝对超时（我第一次就是这样超时的），正确方法是在树节点上保存当前该块连续区域使用哪种金属材料制成的（1，2，3），假设是0的话，那就意味着当前连续区域的状态是割裂的，并不是一致的金属材料，这也意味这当前节点的左右节点肯定是已经经过更新的！这里有一点动态规划的感觉。
+然后要注意的就是一些编程小技巧。
+
+##代码实现：
+#include <stdio.h>  
+#include <string.h>  
+  
+#include <iostream>  
+#include <algorithm>  
+  
+using namespace std;  
+  
+struct node  
+{  
+    int type;  
+    int begin;  
+    int end;  
+    int sum;  
+ } tree[440000];  
+  
+int n, m;  
+  
+void build(int root, int begin, int end)  
+{  
+    tree[root].begin = begin;  
+    tree[root].end = end;  
+    tree[root].type = 1;  
+    if (begin == end) {  
+        tree[root].sum = 1;  
+        return;  
+     }  
+    build(root << 1, begin, begin + (end-begin)/2);  
+    build(root << 1 | 1, begin + (end-begin)/2 + 1, end);  
+    tree[root].sum = tree[root << 1].sum + tree[root << 1 | 1].sum;  
+ }  
+  
+void update(int root, int front, int rear, int type)  
+{  
+    if (front == tree[root].begin && rear == tree[root].end) {  
+        tree[root].sum = type * (rear - front + 1);  
+        tree[root].type = type;  
+        return;  
+     }  
+  
+    int middle = tree[root].begin + (tree[root].end-tree[root].begin) / 2;  
+  
+    if (tree[root].type) {  
+        tree[root<<1].type = tree[root<<1|1].type = tree[root].type;  
+        // 这两步相当重要，等于是把当前状态向下延伸  
+        tree[root<<1].sum = tree[root].type * (middle-tree[root].begin+1);  
+        tree[root<<1|1].sum = tree[root].type * (tree[root].end-middle);  
+     }  
+    if (rear <= middle) {  
+        update(root << 1, front, rear, type);  
+     } else if (front > middle) {  
+        update(root << 1 | 1, front, rear, type);  
+     } else {  
+        update(root << 1, front, middle, type);  
+        update(root << 1 | 1, middle+1, rear, type);  
+     }  
+    tree[root].type = 0;  
+    tree[root].sum = tree[root<<1].sum + tree[root<<1|1].sum;  
+ }  
+  
+int main()  
+{  
+    int times;  
+    int x, y, z;  
+  
+    scanf("%d", ×);  
+  
+    for (int t = 1; t <= times; t++) {  
+        scanf("%d", &n);  
+        build(1, 1, n);  
+        scanf("%d", &m);  
+        for (int i = 1; i <= m; i++) {  
+            scanf("%d%d%d", &x, &y, &z);  
+            update(1, x, y, z);  
+//            printf("%d\n", tree[1].sum);  
+         }  
+        printf("Case %d: The total value of the hook is %d.\n", t, tree[1].sum);  
+     }  
+  
+    return 0;  
+}  

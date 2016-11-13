@@ -1,0 +1,132 @@
+<div>
+	大概就是说，有n种货币，然后输入m种对换方式（单向），只要其中有任意一种货币在经过交换后回到源点能比原来的值还要大，那么就输出Yes，反之输出No
+</div>
+<div>
+	<br />
+	
+</div>div>
+<div>
+	<br />
+	
+</div></div>
+<h2>
+	算法分析：
+</h2>h2>
+<div>
+	<span style="white-space:pre"></span>span>我一开始理解错了题意，以为是指定第一种货币经过交换后最后能比原来的值更大，当时直接拿dijkstra算法做的，后来反复WA。后来我去找博客，才发现，原来是任意一种货币增值就输出Yes。
+</div>div>
+<div>
+	<span style="white-space:pre"></span>span>理解题目后我开始用floyd算法来做，以前是瞎几把乱做，纯粹是套模板，这次我特意去找了一篇讲floyd算法的博客，终于对floyd有了深入的了解。
+</div>div>
+<div>
+	<span style="white-space:pre"></span>span>假设edge[i][j]初始值为1，edge[i][k] = max(edge[i][j]*edge[j][k], egde[i][k]),这个式子的意思是，当货币从i换到k时，有另外一种走法，就是从i走到j，再从j走到k，此时如果是另一种走法会使得货币升值，那么就讲i到k的汇率换成edge[i][j] * edge[j][k]。
+</div>div>
+<div>
+	<span style="white-space:pre"></span>span>这样的话，我们只要遍历 for (i = 1; i &lt;= n; i++)
+</div>div>
+<div>
+	<span style="white-space:pre"></span>span>for (j = 1; j &lt;= n; j++)
+</div>div>
+<div>
+	<span style="white-space:pre"></span>span>for (k = 1; k &lt;= n; k++)
+</div>div>
+<div>
+	<span style="white-space:pre"></span>span>edge[i][k] = max(edge[i][j] * edge[j][k], edge[i][k]);
+</div>div>
+<div>
+	<span style="white-space:pre"></span>span>这样就好了。
+</div>div>
+<div>
+	<br />
+	
+</div>div>
+<h2>
+	代码实现：
+</h2>h2>
+<div>
+	<pre name="code" class="cpp">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#include &lt;map&gt;
+
+using namespace std;
+
+map&lt;string, int&gt; nameToId;
+int n, m;
+double edge[50][50];
+
+bool floyd()
+{
+	for (int i = 1; i &lt;= n; i++) {
+		for (int j = 1; j &lt;= n; j++) {
+			for (int k = 1; k &lt;= n; k++) {
+				if (edge[i][k] &lt; edge[i][j] * edge[j][k]) {
+                    edge[i][k] = edge[i][j] * edge[j][k];
+                
+				}
+            
+			}
+        
+		}
+    
+	}
+	for (int i = 1; i &lt;= n; i++) {
+		if (edge[i][i] &gt; 1) {
+            return true;
+       
+		}
+    
+	}
+    return false;
+
+}
+
+int main()
+{
+    string name01, name02;
+    double rate;
+    int x, y, k = 1;
+
+	while (cin &gt;&gt; n, n) {
+		for (int i = 1; i &lt;= n; i++) {
+			for (int j = 1; j &lt;= n; j++) {
+                edge[i][j] = (i == j ? 1 : 0);
+            
+			}
+        
+		}
+		for (int i = 1; i &lt;= n; i++) {
+            cin &gt;&gt; name01;
+            nameToId.insert(pair&lt;string,int&gt;(name01, i));
+        
+		}
+        cin &gt;&gt; m;
+		for (int i = 1; i &lt;= m; i++) {
+            cin &gt;&gt; name01 &gt;&gt; rate &gt;&gt; name02;
+            x = nameToId[name01];
+            y = nameToId[name02];
+            edge[x][y] = rate;
+        
+		}
+        cout &lt;&lt; &quot;Case &quot; &lt;&lt; k++ &lt;&lt; &quot;: &quot;;
+		if (floyd()) {
+            cout &lt;&lt; &quot;Yes&quot; &lt;&lt; endl;
+        
+		} else {
+            cout &lt;&lt; &quot;No&quot; &lt;&lt; endl;
+        
+		}
+    
+	}
+
+    return 0;
+
+}
+</pre>pre>
+	<br />
+	<br />
+	
+</div>div>
