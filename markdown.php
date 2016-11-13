@@ -16,7 +16,7 @@
         <table class="nav-bar">
             <tr>
                 <td style="width: 100px;">
-                    <a href="index.php" class="index-a"><strong>首页</strong></a>
+                    <a href="index.php" class="sub-a"><strong>首页</strong></a>
                 </td>
                 <td style="width: 100px;">
                     <a href="curse.html" class="sub-a">课程表</a>
@@ -25,44 +25,48 @@
                     <a href="http://115.159.154.139/chat" class="sub-a">聊天室</a>
                 </td>
                 <td style="width: 150px;">
-                    <a href="markdown.php" class="sub-a">markdown-parse</a>
+                    <a href="markdown.php" class="index-a">markdown-parse</a>
                 </td>
                 <td style="width: 100px;">
                     <a href="http://115.159.154.139/blog" class="sub-a">博客系统1.0</a>
                 </td>
             </tr>
         </table>
-    <hr class="blog-hr"/>
-    <div class="row70">
-        <div id="blog-list" class="left"></div>
-        <div class="left">
-            <a class="btn" id="prev-page" style="float: left;">prev</a>
-            <a class="btn" id="next-page" style="float: left;">next</a>
-            <a class="btn" style="float: right; margin-right: 30px;">高级搜索</a>
-            <div style="clear: both;"></div>
-        </div>
-    </div>
-    <div class="row30">
-		<div id="right" class="right" style="padding-left: 20px; margin-top: 30px;">
-        <div style="-webkit-box-shadow: 1px 1px 5px gray; width: 150px; border-radius: 5px;">
-            <img src="images/head.jpg" style="border-radius: 5px; width: 150px; height:150px;" />
-        </div>
-        <div id="brief-introduction">
-            <h2 style="margin-bottom: 10px; color: #00B5B5"><strong>crazy_mad</strong></h2>
-            <p>一个会写点代码的智障</p>
-            <p>一个会画点漫画的智障</p>
-            <p>总而言之，是一个很有才华的智障</p>
-            <br />
-            <p>github账号:&nbsp;<a href="http://github.com"><strong>carzymad</strong></a></p>
-            <p>mail账号:&nbsp;<strong>crazy_mad01@163.com</strong></p>
-		  </div>
-			<hr class="blog-hr" />
+   <hr class="blog-hr"/>
+	<div id="inner" class="row100" style="position: relative; margin-bottom: 30px;">
+<script>
+$(function(){
+	var flag = true;
+	$("#inner").css("height", $("#input").css("height"));
+	$("#change").click(function(){
+		if (flag) {
+			$("#change").html("返回编辑");
+			$("#input").hide();
+			$("#output").show();
+			$("#output").html("");
+			var lines = $("#input").val().split("\n");
+			for (var i = 0; i < lines.length; i++) {
+				$("#output").append(parse(lines[i]));
+			}
+			$("#inner").css("height", $("#output").css("height"));
+			flag = false;
+		} else {
+			$("#change").html("预览效果")
+			$("#output").hide();
+			$("#input").show();
+			$("#inner").css("height", $("#input").css("height"));
+			flag = true;
+		}
+	})
+})
+
+</script>
+		<textarea id="input" style="padding: 3px 3px 3px 3px; border-radius: 4px; width: 1000px; height: 500px; margin-bottom: 30px; font-size:17px; position: absolute;">
+		</textarea> <br />
+		<div id="output" style="position: absolute;">
 		</div>
-		<div id="board" class="right" style="margin-top: 40px;"> 
-			<h3>公告栏</h3>
-		</div>
-    </div>
-    <div style="clear: both;"></div>
+	</div>
+	<a id="change" class="btn">预览效果</a>
 	<hr class="blog-hr" style="margin-top: 100px; margin-bottom: 30px;"/>
 	<center>
    <?php 
