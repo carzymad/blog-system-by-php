@@ -10,13 +10,13 @@
 
 <body style="background-image: url('images/body-bg.jpg')">
 <div class="main">
-    <h1 style="margin-bottom: 0px;"><a style="color: #009999; " href="index.php">CRAZY_MAD</a></h1>
+    <h1 style="margin-bottom: 0px;"><a id="login" style="color: #009999; ">CRAZY_MAD</a></h1>
     <p style="font-size: 15px; color: gray; margin-top: 5px; margin-bottom: 40px;">为coding而生，为coding而疯狂</p>
     <hr class="blog-hr" style=""/>
         <table class="nav-bar">
             <tr>
                 <td style="width: 100px;">
-                    <a href="index.php" class="sub-a"><strong>首页</strong></a>
+                    <a href="index.php" class="sub-a">首页</a>
                 </td>
                 <td style="width: 100px;">
                     <a href="curse.html" class="sub-a">课程表</a>
@@ -25,7 +25,7 @@
                     <a href="http://115.159.154.139/chat" class="sub-a">聊天室</a>
                 </td>
                 <td style="width: 150px;">
-                    <a href="markdown.php" class="index-a">markdown-parse</a>
+                    <a href="markdown.php" class="index-a"><strong>markdown-parse</strong></a>
                 </td>
                 <td style="width: 100px;">
                     <a href="http://115.159.154.139/blog" class="sub-a">博客系统1.0</a>
@@ -39,6 +39,7 @@ $(function(){
 	var flag = true;
 	$("#inner").css("height", $("#input").css("height"));
 	$("#change").click(function(){
+		$(document).scrollTop(230);
 		if (flag) {
 			$("#change").html("返回编辑");
 			$("#input").hide();

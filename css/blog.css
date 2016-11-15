@@ -36,13 +36,44 @@ a:hover {
 .sub-a {
     color: #757575;
 }
-.row70 {
-    float: left;
-    width: 70%;
+.row10 {
+	float: left;
+	width: 10%;
+}
+.row20 {
+	float: left;
+	width: 10%;
 }
 .row30 {
     float: left;
     width: 30%;
+}
+.row40 {
+	float: left;
+	width: 40%;
+}
+.row50 {
+	float: left;
+	width: 50%;
+}
+.row60 {
+	float: left;
+	width: 60%;
+}
+.row70 {
+    float: left;
+    width: 70%;
+}
+.row80 {
+	float: left；
+	width: 80%;
+}
+.row90 {
+	float: left;
+	width: 90%;
+}
+.row100 {
+	width: 100%;
 }
 .left {
     padding: 10px 50px 10px 20px;

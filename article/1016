@@ -1,0 +1,11 @@
+如果直接从MySQL插入查询的时候中文是正常显示的，而用PHP查询插入数据的时候中文就会编程乱码。
+那么请按照下面的方式进行操作：
+
+### 1. 如果数据库是GBK格式的
+在数据库mysq_connect连接语句后面加上
+mysql_query("SET NAMES 'GBK'"); 
+### 2.如果数据库是UTF-8格式的
+  在数据库mysql_connect连接语句后面加上
+mysql_query("SET NAMES 'UTF8'");
+mysql_query("SET CHARACTER SET UTF8"); 
+mysql_query("SET CHARACTER_SET_RESULTS=UTF8'"); 

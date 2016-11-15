@@ -1,9 +1,4 @@
 ##代码：
-#include <stdio.h>  
-#include <string.h>  
-  
-#include <iostream>  
-#include <algorithm>  
   
 using namespace std;  
   
