@@ -72,6 +72,51 @@
 		<p style='font-size: 16px; margin: 5px 0 5px 0'>NBUT CS-154</p>
 	</center>
 </div>
+
+<script>
+<?php
+if ($id) {
+	/*echo "
+$(function(){
+	var url_ = 'article/' + $id;
+	var result = $.ajax({url:url_, async:false});
+	var lines = result.responseText.split("\n");
+	alert(lines);
+})";*/
+}
+?>
+$(function(){
+	var id = '<?php echo $_GET['id']?>';
+	if (id) {
+		$("#title").val("<?php echo $_GET['title'];?>")
+		var url_ = 'article/' + id;
+		var result = $.ajax({url:url_, async:false});	
+		var lines = result.responseText.split(/\n/g);
+		$("#input-text").val(result.responseText);
+		var url_ = 'article/' + id + ".abs";
+		var result = $.ajax({url:url_, async:false});	
+		var lines = result.responseText.split(/\n/g);
+		$("#input-abstract").val(result.responseText);
+	}
+})
+
+$(function(){
+	$("#upload").click(function(){
+		var title_ = $("#title").val();
+		var text_ = $("#input-text").val();
+		var abstra_ = $("#input-abstract").val();
+		var id_ = '<?php echo $_GET['id'] ?>';
+		if (title_ == "" || text_ == "" || abstra_ == "") {
+			return;
+		}
+		//alert(title_);
+		//alert(text_);
+		//alert(abstra_);
+		//alert(id_);
+		upload_ajax(title_, text_, abstra_, id_);
+	})
+})
+</script>
 </body>
 
 </html>

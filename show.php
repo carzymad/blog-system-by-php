@@ -3,7 +3,7 @@
 <title>
 <?php
 $id = $_GET['id'];
-$icon = mysql_connect("localhost", "root", "**********");
+$icon = mysql_connect("localhost", "root", "*********");
 mysql_query("SET NAMES 'UTF8';", $icon);
 mysql_query("SET CHARACTER SET 'UTF8';", $icon);
 mysql_query("SET CHARACTER_SET_RESULTS='UTF8';", $icon);
@@ -55,16 +55,22 @@ echo $row['title'];
             </tr>
         </table>
 	<hr class="blog-hr"/>
-	<center><h1>
+	<center><h1 style="margin-bottom: 0px;">
 <?php
-echo $row['title']
+echo $row['title'];
+$title = $row['title'];
 ?>
-	</h1></center>
+	</h1><p style="font-size:15px; color: gray;">
+<?php
+echo "发表于:".$row['public_date']."&nbsp;&nbsp;最后编辑于:".$row['modify_date'];
+?></p></center>
+
 <script>
+	var lines = [];
 	$(function(){
 		var url_ = "article/" + <?php echo$row['id']; ?>;
 		var result = $.ajax({url: url_, async:false});
-		var lines = result.responseText.split(/\n/g);
+		lines = result.responseText.split(/\n/g);
 		//alert(lines);
 		var n = lines.length;
 		for (var i = 0; i < n; i++) {
@@ -74,6 +80,20 @@ echo $row['title']
 </script>
 	<div class="row100">
 		<div style="padding: 10px 10px 10px 10px;" id="show">
+		</div>
+		<div style="paddomg: 10px 10px 10px 10px;" id="admin">
+<?php
+session_start();
+if ($_SESSION['login']) {
+	echo "
+<form action='newblog.php' style='float:left;' type='post'>
+	<input hidden style='border: 0px;' class='btn' name='id' value='$id' type='text'/>
+	<input hidden style='border: 0px;' class='btn' name='title' value='$title' type='text'/>
+	<input style='border: 0px;' class='btn' value='编辑' type='submit'/>
+</form> <a id='delete' class='btn' style='float: left; margin-left: 10px;'>删除</a>
+";
+}
+?>
 		</div>
 	</div>
 
@@ -132,6 +152,23 @@ $(function(){
 	var width = $("#model-data").css("width").split("px")[0] / 2;
 	$("#model-data").css("left", left-width+"px");
 })
+$("#delete").click(function(){
+	//alert(<?php echo $id;?>);
+	$.ajax({
+		url: "upload.php",
+		type: "POST",
+		data : {		
+			delete_id: <?php echo $id;?>
+		},
+		error : function() {
+			alert("连接失败");
+		},
+		success:function(data){
+			alert("删除成功");
+			location.href = "http://115.159.154.139/blog_2";
+		}
+	});
+});
 </script>
 </body>
 <?php

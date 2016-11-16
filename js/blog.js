@@ -95,7 +95,8 @@ function output(arr) {
 		//alert(arr[i]['id']+arr[i]['title']);
 		var id = "list" + i;
 		var obj = "#" + id;
-		$("#blog-list").append("<h2><a href='show.php?id="+arr[i]['id']+"'>"+arr[i]['title']+"</a></h2>")
+		$("#blog-list").append("<h2 style='margin-bottom: 0px;'><a href='show.php?id="+arr[i]['id']+"'>"+arr[i]['title']+"</a></h2>")
+		$("#blog-list").append("<p style='font-size:15px; color:gray;'>发表于:" + arr[i]['public_date'] + "&nbsp;&nbsp;最后修改于:" + arr[i]['modify_date'] + "</p>")
 		$("#blog-list").append("<div style='padding: 10px 10px 10px 10px' id='"+id+"'></div>")
 		var result = $.ajax({url:"article/"+arr[i]['id']+".abs", async:false});
 		var lines = result.responseText.split(/\n/g);

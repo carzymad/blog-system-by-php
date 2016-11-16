@@ -39,35 +39,30 @@ $(function() {
 	})
 })
 
-$(function(){
-	$("#upload").click(function(){
-		var title_ = $("#title").val();
-		var text_ = $("#input-text").val();
-		var abstra_ = $("#input-abstract").val();
-		if (title_ == "" || text_ == "" || abstra_ == "") {
-			return;
-		}
-		//alert(text_);
-		//alert(abstra_);
-		$.ajax({
-			url : "upload.php",
-			type : "POST",
-			data : {
-				title : title_,
-	   			text : text_,
-				abstract_ : abstra_	
-			},
-			error : function(
-						XMLHttpRequest,
-						textStatus,
-						errorThrown) {
-                    alert(XMLHttpRequest.status);
-                    alert(textStatus);
-                    alert(XMLHttpRequest.readyState);
-			},
-			success : function(data) {
-				alert("success");
-			}	
-		})
+
+function upload_ajax(title_, text_, abstra_, id_) {
+$.ajax({
+		url : "upload.php",
+		type : "POST",
+		data : {
+			id : id_,
+			title : title_,
+			text : text_,
+			abstract_ : abstra_	
+		},
+		error : function(
+					XMLHttpRequest,
+					textStatus,
+					errorThrown) {
+                   alert(XMLHttpRequest.status);
+                   alert(textStatus);
+                   alert(XMLHttpRequest.readyState);
+		},
+		success : function(data) {
+			alert("上传成功");
+			//location.href("show.php?id="+id_+"&title="+title_);
+			//alert(data);
+			location.href = "http://115.159.154.139/blog_2/show.php?id=" + data + "&title=" + title_;
+		}	
 	})
-})
+}
