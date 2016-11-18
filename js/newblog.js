@@ -62,7 +62,7 @@ $.ajax({
 			alert("上传成功");
 			//location.href("show.php?id="+id_+"&title="+title_);
 			//alert(data);
-			location.href = "http://115.159.154.139/blog_2/show.php?id=" + data + "&title=" + title_;
+			location.href = "http://crazymad.cn/show.php?id=" + data + "&title=" + title_;
 		}	
 	})
 }

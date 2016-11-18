@@ -5,7 +5,7 @@ if (!$_SESSION['login']) {
 	echo "false";
 } else if($_POST['delete_id'] != "") {
 	$id = $_POST['delete_id'];
-	$icon = mysql_connect("127.0.0.1", "root", "*********");
+	$icon = mysql_connect("127.0.0.1", "root", "**********");
 	mysql_query("use website", $icon);
 	$result = mysql_query("delete from blog where id=$id;", $icon);
 	$row = mysql_fetch_row($result);
@@ -18,7 +18,7 @@ if (!$_SESSION['login']) {
 	$password = $_POST['psw'];
 	$code = $_POST['code'];
 	$session_code = strtolower($_SESSION['verify_code']);
-	$icon = mysql_connect("127.0.0.1", "root", "r13858251304");
+	$icon = mysql_connect("127.0.0.1", "root", "**********");
 	mysql_query("SET NAMES 'UTF8';", $icon);
 	mysql_query("SET CHARACTER SET 'UTF8';", $icon);
 	mysql_query("SET CHARACTER_SET_RESULTS='UTF8';", $icon);

@@ -2,6 +2,7 @@
 <title>markdown-parse</title>
 <head>
 <link rel="stylesheet" type="text/css" href="css/blog.css">
+<link rel="shortcut icon" type="image/x-icon" href="images/blog.icon">
 <script src="js/jquery.js"></script>
 <script src="js/markdown-parse.js"></script>
 <script>

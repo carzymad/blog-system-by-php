@@ -1,6 +1,6 @@
 <!-- ----------------------------------------------------
  * Author			: crazymad
- * Last modified	: 2016-11-04 19:08
+ * Last modified	: 2016-11-06 15:04
  * Filename			: test.html
  * Description		: 
  ----------------------------------------------------- -->
@@ -10,20 +10,44 @@
 <title>titile</title>
 
 <head>
+<script src="js/jquery.js"></script>
+<script>
+$(function(){
+	$("#submit").click(function(){
+		$.ajax({
+			type : "GET",
+			url : "http://115.159.154.139:8080",
+			error : function() {
+				alert("failed");
+			},
+			success : function(data) {
+				alert("链接成功");
+			}		
+		})
+	})
+})
+$(function(){
+	$("#create").html("<div id='text-div'></div>");
+	$("#text-div").html("<textarea id='text'></textarea><br /><input id='sub' type='submit' value='提交'>");
+	$("#sub").click(function(){
+		alert("test");
+		alert($("#text").val());
+	})
+})
+</script>
+<style>
+</style>
 </head>
 
 <body>
-<form action="show.php">
-	<input name='id' type='text' /><br />
-	<input name='title' type='text' /><br />
-<input type='submit' value="提交" />
-</form>
-<br />
-<form action="test.php">
-	<input name='title' type='text' /><br />
-	<textarea name='text'></textarea><br />
-	<input name='sub' type='submit' value='提交' />	
-</form>
+	<input name="id" type="text" />
+	<input id="submit" type="submit" />
+	<div class="test" style="width: 100px; height: 100px; background-color: red">
+	</div>
+	<div id="create" style="width: 100px; height: 100px; border: 1px solid gray;">
+		<script>
+		</script>
+	</div>
 </body>
 </html>
 

@@ -3,14 +3,14 @@ var true_verify = "";
 var code_isset = false;
 $(function(){
     $("#model-open").click(function(){
-        $("#model-overlay").show();
-        $("#model-data").show();
+        $("#model-overlay").fadeIn(200);
+        $("#model-data").fadeIn(200);
     })
 })
 $(function(){
     $("#model-close").click(function(){
-        $("#model-overlay").hide();
-        $("#model-data").hide();
+        $("#model-overlay").fadeOut(200);
+        $("#model-data").fadeOut(200);
     })
 })
 $(function(){
@@ -60,8 +60,8 @@ $(function(){
                 },
                 success : function(data) {
                     if (data == 'true') {
-                        $("#model-overlay").hide();
-						$("#model-data").hide();
+                        $("#model-overlay").fadeOut(200);
+						$("#model-data").fadeOut(200);
                         code_isset = false;
                         //alert("登录成功！");
 						if ($("#write-blog").html() == null)
@@ -88,8 +88,10 @@ $(function(){
     });
 })
 $(function(){
-    $("#model-overlay").hide();
-    $("#model-data").hide();
+    //$("#model-overlay").fadeOut(200);
+    //$("#model-data").fadeOut(200);
+	$("#model-overlay").hide();
+	$("#model-data").hide();
 })
 $(function(){
     $("#login-verify").bind("click", function(){

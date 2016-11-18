@@ -4,6 +4,7 @@
 <head>
 <link rel="stylesheet" type="text/css" href="css/blog.css">
 <link rel="stylesheet" type="text/css" href="css/model.css">
+<link rel="shortcut icon" type="image/x-icon" href="images/blog.icon">
 <script src="js/jquery.js"></script>
 <script src="js/markdown-parse.js"></script>
 <script src="js/blog.js"></script>
@@ -29,9 +30,6 @@
                 <td style="width: 150px;">
                     <a href="markdown.php" class="sub-a">markdown-parse</a>
                 </td>
-                <td style="width: 130px;">
-						  <a href="http://115.159.154.139/blog" class="sub-a">博客系统1.0</a>
-					 </td>
 					 <td style='width: 100px;'>
 						<a id='write-blog' class='index-a' href='newblog.php'><strong>写博客</strong></a>
 					</td>

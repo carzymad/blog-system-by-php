@@ -8,7 +8,7 @@
     top: 0px;
     z-index: 1000;
     opacity: 0.5;
-    position: absolute;
+    position: fixed;
     background-color: #333;
 }
 .model-data {
@@ -19,10 +19,13 @@
     background-color: #FAFAFA;
     padding: 15px;
     margin: 0 auto;
-    margin-top: 70px;
+    margin-top: -250px;
+	margin-left: -150px;
+	left: 50%;
+	top: 50%;
     border-radius: 10px;
     -webkit-box-shadow: 0px 0px 4px gray;
-    position: relative;
+    position: fixed;
 }
 .row25 {
     width: 25%;
@@ -58,14 +61,15 @@
 .submit-middle {
     padding: 4px;
     width: 100px;
-    background: green;
-    border: solid 1px green;
+    background: #0E699C;
+    border: solid 0px blue;
     border-radius: 4px;
     color: #fff;
     font-size: 18px;
-    font-weight: 1000;
+    font-weight: 2000;
     width: 180px;
     cursor: pointer;
+    -webkit-box-shadow: 0px 0px 4px #0E699C;
 }
 .closeIcon {
     position: relative;

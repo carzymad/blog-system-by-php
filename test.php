@@ -5,7 +5,7 @@ $file = fopen("article/test.txt", "w") or die("Can not open the file");
 $icon = true;
 ?>
 <?php
-$icon = mysql_connect("127.0.0.1", "root", "*********");
+$icon = mysql_connect("127.0.0.1", "root", "**********");
 mysql_query("SET NAMES 'UTF8';", $icon);
 mysql_query("SET CHARACTER SET 'UTF8';", $icon);
 mysql_query("SET CHARACTER_SET_RESULTS='UTF8';", $icon);

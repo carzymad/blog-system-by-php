@@ -4,15 +4,25 @@
 <head>
 <link rel="stylesheet" type="text/css" href="css/blog.css">
 <link rel="stylesheet" type="text/css" href="css/model.css">
+<link rel="shortcut icon" type="image/x-icon" href="images/blog.icon">
 <script src="js/jquery.js"></script>
 <script src="js/model.js"></script>
 <script src="js/markdown-parse.js"></script>
 <script src="js/blog.js"></script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?734830cae2de9f269cc030f54d210de3";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
 </head>
 
 <body style="background-image: url('images/body-bg.jpg')">
 
-<div class="main" style="position: absolute; top: 0px;">
+<div class="main" style="top: 0px;">
     <h1 style="margin-bottom: 0px;"><a id="model-open" style="color: #009999; ">CRAZY_MAD</a></h1>
     <p style="font-size: 15px; color: gray; margin-top: 5px; margin-bottom: 40px;">为coding而生，为coding而疯狂</p>
     <hr class="blog-hr" style=""/>
@@ -30,12 +40,9 @@
                 <td style="width: 150px;">
                     <a href="markdown.php" class="sub-a">markdown-parse</a>
                 </td>
-                <td style="width: 130px;">
-                    <a href="http://115.159.154.139/blog" class="sub-a">博客系统1.0</a>
-                </td>
 					 <?php
 						session_start();
-						if ($_SESSION['login']) {
+						if ($_SESSION['admin_login']) {
 							echo "<td style='width: 100px;'><a id='write-blog' class='sub-a' href='newblog.php'>写博客</a></td>";
 						}
 					 ?>
@@ -45,9 +52,9 @@
     <div class="row70">
         <div id="blog-list" class="left"></div>
         <div class="left">
-            <a class="btn" id="prev-page" style="float: left;">prev</a>
-            <a class="btn" id="next-page" style="float: left;">next</a>
-            <a class="btn" style="float: right; margin-right: 30px;">高级搜索</a>
+            <input class="btn" type="submit" id="prev-page" style="float: left;" value='prev'/>
+            <input class="btn" type="submit" id="next-page" style="float: left;" value='next'/>
+            <input class="btn" type="submit" style="float: right; margin-right: 30px;" value='高级搜索'/>
             <div style="clear: both;"></div>
         </div>
     </div>
@@ -80,8 +87,9 @@
 		<p style='font-size: 16px; margin: 5px 0 5px 0'>mail: crazy_mad01@163.com or 2116913961@qq.com</p>
 		<p style='font-size: 16px; margin: 5px 0 5px 0'>NBUT CS-154</p>
 	</center>
-	</div>
-    <div class="model-data" id="model-data" style="position: absolute; background: -webkit-gradient(linear, 0 0, 20% 0%, from(#FFF), to(#FaFaFa));">
+</div>
+<!-- 以下是登陆模态窗页面 -->
+<div class="model-data" id="model-data" style="background: -webkit-gradient(linear, 0 0, 20% 0%, from(#FFF), to(#FaFaFa));">
         <div class="closeIcon" id="model-close">
             <img style="width:20px; height: 20px;" src="images/close.png">
         </div><div class="clear"></div>
@@ -120,15 +128,6 @@
         </form>
 </div>
 <div class="model-overlay" id="model-overlay">
-<div>
-<script>
-$(function(){
-	var left = $(document).width() / 2;
-	var width = $("#model-data").css("width").split("px")[0] / 2;
-	$("#model-data").css("left", left-width+"px");
-})
-</script>
-
 </body>
 
 </html>
